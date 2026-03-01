@@ -295,7 +295,11 @@ def _skewness(x: np.ndarray) -> float:
     s = np.std(x, ddof=1)
     if s < 1e-12:
         return 0.0
-    return float(np.mean(((x - mu) / s) ** 3) * n * (n - 1) / (n - 2) if n > 2 else 0.0)
+    if n > 2:
+        skew_val = float(np.mean(((x - mu) / s) ** 3) * n * (n - 1) / (n - 2))
+    else:
+        skew_val = 0.0
+    return skew_val
 
 
 def _kurtosis(x: np.ndarray) -> float:

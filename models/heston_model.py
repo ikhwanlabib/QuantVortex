@@ -315,8 +315,8 @@ class HestonModel:
 
         def objective(params: np.ndarray) -> float:
             kappa_, theta_, sigma_, rho_, v0_ = params
-            # Feller condition soft penalty
-            feller_penalty = max(0.0, 2 * kappa_ * theta_ - sigma_ ** 2)
+            # Soft penalty when Feller condition (2κθ > σ²) is violated
+            feller_violation = max(0.0, sigma_ ** 2 - 2 * kappa_ * theta_)
             errors = []
             for K, T, mp, ot in zip(strikes, expiries, mkt_prices, opt_types):
                 try:
@@ -327,7 +327,7 @@ class HestonModel:
                 except Exception:
                     errors.append(1e6)
             rmse = np.sqrt(np.mean(errors))
-            return rmse + 1e-4 * max(0.0, -(2 * kappa_ * theta_ - sigma_ ** 2))
+            return rmse + 1e-4 * feller_violation
 
         bounds = [
             (0.01, 20.0),   # kappa
