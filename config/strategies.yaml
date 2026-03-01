@@ -1,0 +1,27 @@
+stat_arb:
+  enabled: true
+  allocation: 0.25
+  lookback: 252
+  entry_z: 2.0
+  exit_z: 0.5
+
+momentum:
+  enabled: true
+  allocation: 0.20
+  lookback: 126
+  holding_period: 21
+
+mean_reversion:
+  enabled: true
+  allocation: 0.15
+  half_life_max: 42
+
+ml_alpha:
+  enabled: true
+  allocation: 0.25
+  retrain_frequency: 63
+
+rl_trader:
+  enabled: true
+  allocation: 0.15
+  episodes: 1000
