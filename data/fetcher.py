@@ -269,8 +269,8 @@ class DataFetcher:
         if isinstance(raw.columns, pd.MultiIndex):
             raw.columns = raw.columns.get_level_values(0)
 
-        # Normalise column names.
-        raw.columns = [c.capitalize() for c in raw.columns]
+        # Normalise column names (title-case to preserve e.g. "Adj Close").
+        raw.columns = [c.title() for c in raw.columns]
         raw.index = pd.to_datetime(raw.index)
         raw.index.name = "Date"
 

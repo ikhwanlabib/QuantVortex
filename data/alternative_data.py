@@ -123,7 +123,7 @@ class SentimentAnalyzer:
         # Build a deterministic seed from ticker + date so results are
         # reproducible across runs without relying on global state.
         seed_str = f"{ticker}_{date.strftime('%Y%m%d')}_{self._random_seed}"
-        seed_int = int(hashlib.md5(seed_str.encode()).hexdigest(), 16) % (2**31)
+        seed_int = int(hashlib.sha256(seed_str.encode()).hexdigest(), 16) % (2**31)
         rng = random.Random(seed_int)
 
         all_templates = _BULLISH_TEMPLATES + _BEARISH_TEMPLATES + _NEUTRAL_TEMPLATES

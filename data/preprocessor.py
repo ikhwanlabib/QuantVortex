@@ -221,7 +221,7 @@ class DataPreprocessor:
 
         # ---- Bollinger Bands (20, 2σ) ---------------------------------------
         bb_mid = close.rolling(window=20).mean()
-        bb_std = close.rolling(window=20).std(ddof=0)
+        bb_std = close.rolling(window=20).std(ddof=1)
         result["BB_mid"] = bb_mid
         result["BB_upper"] = bb_mid + 2 * bb_std
         result["BB_lower"] = bb_mid - 2 * bb_std
